@@ -1,0 +1,88 @@
+Analysis of the file whatisthepassphrase.kdbx
+of size 2613 bytes and sha256 e52fade33489e260dec76e1d95a284df13dd60d92953675248be35f84cc45657
+
+See https://keepass.info/help/kb/kdbx.html
+
+Looks like a typical database created with KeePass 4.0 on a modern machine,
+i.e. key derivation takes several seconds, making password guessing inefficient.
+
+The size implies the database contains more than just a Bitcoin secret key.
+
+Possibly the contents is just a further hint, not the prize itself.
+
+00000000  03 d9 a2 9a 67 fb 4b b5  00 00 04 00 02 10 00 00  |....g.K.........|
+00000010  00 31 c1 f2 e6 bf 71 43  50 be 58 05 21 6a fc 5a  |.1....qCP.X.!j.Z|
+00000020  ff 03 04 00 00 00 01 00  00 00 04 20 00 00 00 5e  |........... ...^|
+00000030  de 19 52 9e fc 5b 42 63  c5 5c 45 53 13 55 55 b5  |..R..[Bc.\ES.UU.|
+00000040  4f ba 4a 5a ba 49 5e 01  2d 6f 24 af 73 bb 4d 07  |O.JZ.I^.-o$.s.M.|
+00000050  10 00 00 00 4a 1a e0 16  a8 e0 27 74 13 e4 62 93  |....J.....'t..b.|
+00000060  72 f5 18 0a 0b 8b 00 00  00                       |r..........B....|
+
+03 d9 a2 9a	Signature (1)
+67 fb 4b b5	Signature (2)
+00 00 04 00	Format version KDBX 4.0
+
+02 10 00 00 00						Encryption algorithm (length 16)
+31 c1 f2 e6 bf 71 43 50 be 58 05 21 6a fc 5a ff		AES-256 (NIST FIPS 197, CBC mode, PKCS #7 padding)
+
+03 04 00 00 00						Compression algorithm (length 4)
+01 00 00 00						GZip
+04 20 00 00 00						Master salt (length 32)
+5e de 19 52 9e fc 5b 42 63 c5 5c 45 53 13 55 55 b5 4f ba 4a 5a ba 49 5e 01 2d 6f 24 af 73 bb 4d
+07 10 00 00 00						IV (length 16)
+4a 1a e0 16 a8 e0 27 74 13 e4 62 93 72 f5 18 0a
+0b 8b 00 00 00						KDF Parameters (length 139)
+
+00000060                              00 01 42 05 00 00 00  |r..........B....|
+00000070  24 55 55 49 44 10 00 00  00 ef 63 6d df 8c 29 44  |$UUID.....cm..)D|
+00000080  4b 91 f7 a9 a4 03 e3 0a  0c 05 01 00 00 00 49 08  |K.............I.|
+00000090  00 00 00 9e 00 00 00 00  00 00 00 05 01 00 00 00  |................|
+000000a0  4d 08 00 00 00 00 00 00  04 00 00 00 00 04 01 00  |M...............|
+000000b0  00 00 50 04 00 00 00 02  00 00 00 42 01 00 00 00  |..P........B....|
+000000c0  53 20 00 00 00 c0 d1 e5  d9 5d b0 cd d7 76 b7 e9  |S .......]...v..|
+000000d0  fb df 17 09 64 61 1b f2  bd 8e 61 f1 80 da 57 e6  |....da....a...W.|
+000000e0  ad 28 91 b2 94 04 01 00  00 00 56 04 00 00 00 13  |.(........V.....|
+000000f0  00 00 00 00 
+
+  00 01 = Format version 1.0
+  42 = Byte array, 05 00 00 00 = Name size (5), Name "$UUID", 10 00 00 00 = Value size (16)	UUID
+    Value ef 63 6d df 8c 29 44 4b 91 f7 a9 a4 03 e3 0a 0c = Argon2d
+  05 = UInt64, 01 00 00 00 = Name size (1), Name "I", 08 00 00 00 = Value size (8)		Iterations: 158
+    Value 9e 00 00 00 00 00 00 00 = 158
+  05 = UInt64, 01 00 00 00 = Name size (1), Name "M", 08 00 00 00 = Value size (8)		Memory in bytes: 64MB
+    Value 00 00 00  04 00 00 00 00 = 67108864 (64MB)
+  04 = UInt32, 01 00 00 00 = Name size (1), Name "P", 04 00 00 00 = Value size (4)		Parallelism: 2
+    Value 02  00 00 00 = 2
+  42 = Bytes array, 01 00 00 00 = Name size (1), Name "S", 20 00 00 00 = Value size (32)	Salt (length 32)
+    Value c0 d1 e5  d9 5d b0 cd d7 76 b7 e9 fb df 17 09 64 61 1b f2  bd 8e 61 f1 80 da 57 e6 ad 28 91 b2 94
+  04 = UInt32, 01 00  00 00 = Name size (1), Name "V", 04 00 00 00 = Value size (4)		Version 1.3
+    Value 13 00 00 00
+  00 = End
+
+000000f0           00 00 04 00 00  00 0d 0a 0d 0a           |..............*L|
+
+00 04 00 00 00 0d 0a 0d 0a End (length 4)
+
+000000f0                                          01 2a 4c  |..............*L|
+00000100  94 e3 94 52 20 eb 10 56  25 60 5c 3b f8 04 96 40  |...R ..V%`\;...@|
+00000110  0d 48 e5 47 e0 be 4a 9b  c1 63 b9 07 cb 43 aa 55  |.H.G..J..c...C.U|
+00000120  1e fb c1 9c e6 4e 18 f4  74 88 cf 46 fb 1d 4c fb  |.....N..t..F..L.|
+00000130  46 22 2b 49 52 26 35 af  f4 39 75 fa ae e8 9f f4  |F"+IR&5..9u.....|
+00000140  a5 d9 f1 f3 f9 e0 f3 0d  41 29 eb 7d 3d e9 15 53  |........A).}=..S|
+00000150  e9 d4 36 db b7 d9 2c 51  fe 0f 5b 40 ad b0 08 00  |..6...,Q..[@....|
+00000160  00 01 07 51 d5 d5 95 23  8a e6 c3 e1 a5 34 5b b2  |...Q...#.....4[.|
+00000170  02 0b ae fe c8 55 2e b8  29 90 ae 6a a2 a8 7b c6  |.....U..)..j..{.|
+
+[ more encrypted contents ]
+
+000009a0  31 4d de 91 78 f2 cb a4  dd bd 88 2f 0f 01 be 8d  |1M..x....../....|
+000009b0  ca 50 88 a0 2d 48 4f c9  b8 f9 d2 53 88 8c 88 4b  |.P..-HO....S...K|
+000009c0  77 6f d4 9d f7 29 3e 8b  22 94 38 d3 d9 7d 16 e9  |wo...)>.".8..}..|
+000009d0  0d b9 38 1f e3 c2 bf 9b  1e 69 bb 54 c3 72 ed f0  |..8......i.T.r..|
+000009e0  08 2b 7d 7a 8d 0a bc 06  5b e7 78 e9 de 17 1f fb  |.+}z....[.x.....|
+000009f0  a9 38 40 4f eb 28 65 fe  0d be 51 28 73 c7 88 e8  |.8@O.(e...Q(s...|
+00000a00  8e a2 59 77 35 2d 97 b7  e4 0d 58 6f 23 57 58 dc  |..Yw5-....Xo#WX.|
+00000a10  1e 82 cb 3a b1 48 61 39  a5 07 8a c0 a0 c4 30 3f  |...:.Ha9......0?|
+00000a20  e1 0b 29 a7 5b 1d d8 82  3d 0d af 34 bf 56 c6 93  |..).[...=..4.V..|
+00000a30  32 00 00 00 00                                    |2....|
+
